@@ -8,7 +8,7 @@ output: html_document
 
 ## Loading the data
 
-This project is so interesting and relevant to my life! Yay for Data Science! Another change... and another one. Again
+This project is so interesting and relevant to my life! Yay for Data Science! Another change... and another one. Again... and Again
 
 ```{r, include=FALSE}
 load("house_elections.rda")
