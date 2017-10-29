@@ -14,8 +14,9 @@ load("house_elections.rda")
 load("candidates.rda")
 load("committees.rda")
 load("contributions.rda")
-load("individuals.rda")
 ```
+
+
 ```{r}
 library(dplyr)
 library(tidyverse)
@@ -38,72 +39,45 @@ glimpse(contributions)
 glimpse(house_elections)
 ```
 
-```{r}
-glimpse(individuals)
-```
-```{r}
-glimpse(committees_w)
-```
-
 
 ```{r}
-contributions_w <- contributions %>%
-  group_by(cmte_id, cand_id) %>%
+transaction_info <- contributions %>%
+  group_by(transaction_type, cand_id) %>%
   summarise(transaction_total = sum(transaction_amt))
 
-glimpse(contributions_w)
+glimpse(transaction_info)
 ```
 
-```{r}
-committees_w <- committees %>%
-  group_by(cmte_id, cmte_name)
-committees_w <- committees_w[,c("cmte_id", "cmte_name")]
-
-glimpse(committees_w)
-```
 
 ```{r}
-candidates_w <- candidates %>%
+candidates_info <- candidates %>%
   group_by(cand_id, cand_name)
-candidates_w <- candidates_w[,c("cand_id", "cand_name")]
 
-glimpse(candidates_w)
+candidates_info <- candidates_info[,c("cand_id", "cand_name")]
+
+glimpse(candidates_info)
 ```
 
 ```{r}
-contributions_and_committee <- committees_w %>%
-  inner_join(contributions_w, by = c("cmte_id"))
+transaction_and_candidate <- transaction_info %>%
+  inner_join(candidates_info, by = c("cand_id"))
 
-glimpse(contributions_and_committee)
+glimpse(transaction_and_candidate)
 ```
 
 ```{r}
-committees_contributions_to_candidates <- candidates_w %>%
-  inner_join(contributions_and_committee, by = c("cand_id"))
-
-glimpse(committees_contributions_to_candidates)
-```
-
-```{r}
-most_expensive_candidates <- committees_contributions_to_candidates %>%
+most_expensive_pres_candidates <- transaction_and_candidate %>%
   group_by(cand_name, cand_id) %>%
   summarise(contribution_total = sum(transaction_total))
 ```
 
 ```{r}
-committees_contributions_to_pres_candidates <- committees_contributions_to_candidates %>%
-  filter(cand_id == "P80003338" | cand_id == "P80003353") %>%
-  group_by(cand_id) %>%
-  mutate(p_contribution = transaction_total / sum(transaction_total))
-  
-
-glimpse(committees_contributions_to_pres_candidates)
+transaction_and_pres_candidates <- transaction_and_candidate %>%
+  filter(cand_id == "P80003338" | cand_id == "P80003353")
 ```
 
-```{r}
-ggplot(committees_contributions_to_pres_candidates, aes(x = cand_id, y = p_contribution, fill = cmte_id)) +
-  geom_bar(stat = "bill"))
-```
+
+Blah
 
 
 
