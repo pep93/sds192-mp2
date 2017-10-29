@@ -19,6 +19,7 @@ load("individuals.rda")
 ```{r}
 library(dplyr)
 library(tidyverse)
+library(ggplot2)
 ```
 
 ```{r}
@@ -82,4 +83,28 @@ committees_contributions_to_candidates <- candidates_w %>%
 
 glimpse(committees_contributions_to_candidates)
 ```
+
+```{r}
+most_expensive_candidates <- committees_contributions_to_candidates %>%
+  group_by(cand_name, cand_id) %>%
+  summarise(contribution_total = sum(transaction_total))
+```
+
+```{r}
+committees_contributions_to_pres_candidates <- committees_contributions_to_candidates %>%
+  filter(cand_id == "P80003338" | cand_id == "P80003353") %>%
+  group_by(cand_id) %>%
+  mutate(p_contribution = transaction_total / sum(transaction_total))
+  
+
+glimpse(committees_contributions_to_pres_candidates)
+```
+
+```{r}
+ggplot(committees_contributions_to_pres_candidates, aes(x = cand_id, y = p_contribution, fill = cmte_id)) +
+  geom_bar(stat = "bill"))
+```
+
+
+
 
