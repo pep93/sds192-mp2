@@ -49,6 +49,7 @@ glimpse(transaction_info)
 ```
 
 
+
 ```{r}
 candidates_info <- candidates %>%
   group_by(cand_id, cand_name)
@@ -74,11 +75,60 @@ most_expensive_pres_candidates <- transaction_and_candidate %>%
 ```{r}
 transaction_and_pres_candidates <- transaction_and_candidate %>%
   filter(cand_id == "P80003338" | cand_id == "P80003353")
+
+glimpse(transaction_and_pres_candidates)
 ```
 
+```{r}
+ggplot(transaction_and_pres_candidates, aes(x = cand_name, y = transaction_total, fill = transaction_type)) +
+  geom_bar(stat = "identity")
+```
 
-Blah
+```{r}
+library(RColorBrewer)
+
+display.brewer.all()
+```
+
+```{r}
+ggplot(transaction_and_pres_candidates, aes(x = cand_name, y = transaction_total, fill = transaction_type)) +
+  geom_bar(stat = "identity") +
+  scale_fill_brewer(palette = "Set1") +
+  ggtitle("Contributions Made to \n2012 Presidential Candidates") +
+  theme(plot.title = element_text(hjust = 0.5, size = 20, face = "bold")) +
+  scale_x_discrete("Candidates", labels = c("Barack Obama", "Mitt Romney")) + 
+  scale_y_continuous("Campaign Contributions", labels = scales::dollar) +
+  labs(fill = "Contribution Type\n") +
+  theme(axis.ticks.length = unit(0.50, "cm"),
+        panel.background = element_rect(fill = "gray"),
+        panel.grid.major = element_line(colour = "gray"),
+        panel.grid.minor = element_line(colour = "gray"),
+        axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20), 
+        axis.ticks.x = element_blank())
+```
+
+```{r}
+ggplot(transaction_and_pres_candidates, aes(x = cand_name, y = transaction_total, fill = transaction_type)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Contributions Made to \n2012 Presidential Candidates") +
+  theme(plot.title = element_text(hjust = 0.5, size = 20, face = "bold")) +
+  scale_x_discrete("Candidates", labels = c("Barack Obama", "Mitt Romney")) + 
+  scale_y_continuous("Contribution Amount", labels = scales::dollar) +
+  scale_fill_discrete(name = "Contribution Purpose\n",
+                      breaks = c("24A", "24N", "24C", "24E", "24F", "24K", "24Z"),
+                      labels = c("Opposing", "Opposing", "Supporting", "Supporting", "Supporting", "Supporting", "Supporting")) +
+  theme(axis.ticks.length = unit(0.50, "cm"),
+        panel.background = element_rect(fill = "gray"),
+        panel.grid.major = element_line(colour = "gray"),
+        panel.grid.minor = element_line(colour = "gray"),
+        axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20), 
+        axis.ticks.x = element_blank())
+```
+
+   scale_fill_manual(values = c("red", "blue", "blue", "blue", "blue", "red", "blue")) +
 
 
-
-
+scale_fill_manual(values = c('24C' = "red", '24N' = "red", '24C' = "blue", '24E' = "blue", '24F' = "blue", '24K' = "blue", '24Z'= "blue"), name = "Contribution Type") +
+  scale_colour_manual(values = c('24' = "red", '24N' = "red", '24C' = "blue", '24E' = "blue", '24F' = "blue", '24K' = "blue", '24Z'= "blue"), name = "Contribution Type") +
