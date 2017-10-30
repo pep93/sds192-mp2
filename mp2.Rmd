@@ -113,11 +113,7 @@ ggplot(transaction_and_pres_candidates, aes(x = cand_name, y = transaction_total
   geom_bar(stat = "identity") +
   ggtitle("Contributions Made to \n2012 Presidential Candidates") +
   theme(plot.title = element_text(hjust = 0.5, size = 20, face = "bold")) +
-  scale_x_discrete("Candidates", labels = c("Barack Obama", "Mitt Romney")) + 
-  scale_y_continuous("Contribution Amount", labels = scales::dollar) +
-  scale_fill_discrete(name = "Contribution Purpose\n",
-                      breaks = c("24A", "24N", "24C", "24E", "24F", "24K", "24Z"),
-                      labels = c("Opposing", "Opposing", "Supporting", "Supporting", "Supporting", "Supporting", "Supporting")) +
+  scale_fill_manual(values = c("red", "blue", "blue", "blue", "blue", "red", "blue")) +
   theme(axis.ticks.length = unit(0.50, "cm"),
         panel.background = element_rect(fill = "gray"),
         panel.grid.major = element_line(colour = "gray"),
@@ -127,8 +123,14 @@ ggplot(transaction_and_pres_candidates, aes(x = cand_name, y = transaction_total
         axis.ticks.x = element_blank())
 ```
 
-   scale_fill_manual(values = c("red", "blue", "blue", "blue", "blue", "red", "blue")) +
-
 
 scale_fill_manual(values = c('24C' = "red", '24N' = "red", '24C' = "blue", '24E' = "blue", '24F' = "blue", '24K' = "blue", '24Z'= "blue"), name = "Contribution Type") +
   scale_colour_manual(values = c('24' = "red", '24N' = "red", '24C' = "blue", '24E' = "blue", '24F' = "blue", '24K' = "blue", '24Z'= "blue"), name = "Contribution Type") +
+  
+  
+  
+scale_x_discrete("Candidates", labels = c("Barack Obama", "Mitt Romney")) + 
+  scale_y_continuous("Contribution Amount", labels = scales::dollar) +
+  scale_fill_discrete(name = "Contribution Purpose\n",
+                      breaks = c("24A", "24N", "24C", "24E", "24F", "24K", "24Z"),
+                      labels = c("Opposing", "Opposing", "Supporting", "Supporting", "Supporting", "Supporting", "Supporting")) +
