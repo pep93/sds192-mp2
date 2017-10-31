@@ -1,6 +1,6 @@
 ---
 title: "Mini-Project 2"
-author: "Your Name Here"
+author: "Paige Patrick and Vanessa Morales"
 date: "October 31, 2017"
 output: html_document
 ---
@@ -114,5 +114,47 @@ ggplot(support_total_pres_candidates, aes(x = cand_name, y = support_total, fill
         axis.ticks.x = element_blank())
 ```
 
-  
+##Financial Allocations Spent By Committees for the 2012 Presidential Campaign 
+``
+``
+
+Our data graphic shows the amount spent by committees for Barack Obama and Mitt Romney; The red represents money spent opposing the candidate and the blue indicates money spent supporting the candidate. 
+
+The x-axis displays the two final candidates for the 2012 presidential election; Barack Obama and Mitt Romney.  The y-axis displays the total amount of money spent by committees.  
+
+We catagorized the committee codes by transaction type based on either positive or negative money spent for or against a candidate. 
+The transaction codes used by committees are as follows:
+
+Money Spent Opposing Candidate:
+
+24A-Independent expenditure opposing election of candidate  
+24N-Communication cost against candidate (only for Form 7 filer)  
+24K-Contribution made to nonaffiliated committee  
+
+Money Spent Supporting Candidate:
+
+24E-Independent expenditure advocating election of candidate  
+24C-Coordinated party expenditure  
+24F-Communication cost for candidate (only for Form 7 filer)  
+24Z-In-kind contribution made to registered filer  
+
+By using the transaction code and therefore the intention of the money, we are able to look at the amount of money going either for or against each candidate.  Our data graphic shows that 2.5 times more money was spent opposing Barack Obama than was spent opposing Mitt Romney. We felt this was interesting because it shows the sheer amount of effort spent against Barack Obama. 
+
+To give an example of what money spent against Barack Obama goes to: below is an ad that ran during the 2012 election cycle. It is paid for by the committee Crossroads Grassroots Policy Strategies.  This committe's number 1 transaction type is 24A, (24A-Independent expenditure opposing election of candidate), against Barack Obama. 
+
+![Ad against Obama, provided by ProPubica.org](https://assets.propublica.org/legacy/images/_threeTwo800w/gps_tv_ad_390x260_120813.jpg "Anti-Obama Ad")
+
+Restore Our Future, American Crossroads, Americans for Prosperity, and Crossroads Grassroots Policy Strategiees are all Republican affiliated committees and they constitute the top **17** contributers of money spent to Obama, these are **negative** (using code 24A; Independent expenditure opposing election of candidate). Obama does not get a postive conribution until The Democratic National Committe squeezes in the 18 top contributing spot.
+
+Alternately, The Republican National Committee, Restore our Future, Republican National Committee make up the top 4 committee contributors to Mitt Romney. His first **negative** money doesn't come until the 5th spot with Priorites USA Action (using code 24A; Independent expenditure opposing election of candidate)
+
+We chose to show the net positive and negative amounts of this number crunching and committee affiliation in our data graphic so that the braoder picture of money spent for or against a candidate can be clear. 
+
+
+
+
+
+
+
+
 
