@@ -114,41 +114,38 @@ ggplot(support_total_pres_candidates, aes(x = cand_name, y = support_total, fill
         axis.ticks.x = element_blank())
 ```
 
-##Financial Allocations Spent By Committees for the 2012 Presidential Campaign 
+##Financial Allocations Spent By Committees Toward the 2012 Presidential Campaign 
 ``
 ``
 
-Our data graphic shows the amount spent by committees for Barack Obama and Mitt Romney; The red represents money spent opposing the candidate and the blue indicates money spent supporting the candidate. 
+Our data graphic shows the amount spent by committees toward Barack Obama and Mitt Romney;the red represents money spent opposing the candidate and the blue indicates money spent supporting the candidate. 
 
 The x-axis displays the two final candidates for the 2012 presidential election; Barack Obama and Mitt Romney.  The y-axis displays the total amount of money spent by committees.  
 
-We catagorized the committee codes by transaction type based on either positive or negative money spent for or against a candidate. 
+We catagorized the committee codes by transaction type based on whether the objective was for or against a candidate. 
 The transaction codes used by committees are as follows:
 
-Money Spent Opposing Candidate:
+Money Spent Opposing and Against a Candidate:  
 
-24A-Independent expenditure opposing election of candidate  
-24N-Communication cost against candidate (only for Form 7 filer)  
-24K-Contribution made to nonaffiliated committee  
+24A and 24N 
 
-Money Spent Supporting Candidate:
+Money Spent Towards, Supporting, and Advocating for a Candidate:  
 
-24E-Independent expenditure advocating election of candidate  
-24C-Coordinated party expenditure  
-24F-Communication cost for candidate (only for Form 7 filer)  
-24Z-In-kind contribution made to registered filer  
+24E, 24C, 24F, 24Z, 24K
 
-By using the transaction code and therefore the intention of the money, we are able to look at the amount of money going either for or against each candidate.  Our data graphic shows that 2.5 times more money was spent opposing Barack Obama than was spent opposing Mitt Romney. We felt this was interesting because it shows the sheer amount of effort spent against Barack Obama. 
+By using the transaction code and therefore the intention of the money, we are able to look at the amount of money opposing or supporting a candidate.  Our data graphic shows that 2.5 times more money was spent opposing Barack Obama than was spent opposing Mitt Romney. In dollars, this ammounts to $240 million more that was spent opposing Obama than Romney. $35 million more was spent in support of Mitt Romeny than Barack Obama. We felt this was interesting because it shows the sheer amount of effort spent against Barack Obama. 
 
-To give an example of what money spent against Barack Obama goes to: below is an ad that ran during the 2012 election cycle. It is paid for by the committee Crossroads Grassroots Policy Strategies.  This committe's number 1 transaction type is 24A, (24A-Independent expenditure opposing election of candidate), against Barack Obama. 
+To give an example of what money spent against Barack Obama goes to: below is an ad that ran during the 2012 election cycle. It is paid for by the committee Crossroads Grassroots Policy Strategies. This committe's number 1 transaction type is opposing Barack Obama. 
 
 ![Ad against Obama, provided by ProPubica.org](https://assets.propublica.org/legacy/images/_threeTwo800w/gps_tv_ad_390x260_120813.jpg "Anti-Obama Ad")
 
-Restore Our Future, American Crossroads, Americans for Prosperity, and Crossroads Grassroots Policy Strategiees are all Republican affiliated committees and they constitute the top **17** contributers of money spent to Obama, these are **negative** (using code 24A; Independent expenditure opposing election of candidate). Obama does not get a postive conribution until The Democratic National Committe squeezes in the 18 top contributing spot.
+Restore Our Future, American Crossroads, Americans for Prosperity, and Crossroads Grassroots Policy Strategiees are all Republican affiliated committees. They constitute the top 17 allocators of money toward Obama. These committes spent money to negatively impact Obama's election. Money spent supporting Obama isn't seen until The Democratic National Committee enters the 18th top contribution spot. 
 
-Alternately, The Republican National Committee, Restore our Future, Republican National Committee make up the top 4 committee contributors to Mitt Romney. His first **negative** money doesn't come until the 5th spot with Priorites USA Action (using code 24A; Independent expenditure opposing election of candidate)
+Alternately, The Republican National Committee, Restore our Future, and Republican National Committee make up the top 4 committee contributors to Mitt Romney. These are all allocationg money to support Mitt Romney. It isn't until his 5th top committee allocation that money is spent opposing him. 
 
-We chose to show the net positive and negative amounts of this number crunching and committee affiliation in our data graphic so that the braoder picture of money spent for or against a candidate can be clear. 
+We chose to show the financial allocation objectives toward each candidate in our data graphic so that the amount of money spent for or against a candidate can be clear. We think this is interesting because it shows that more money spent oppossing a candidate does not necessarily correlate to a victory. 
+
+In a generalized sense our anaysis shows how money is spent in elections. Large sums and efforts are made opposing candidates.  We show that while 2.5 times more money was spent oppossing the election of Barack Obama in 2012; despite this he still managed to win. In a broad sense this can be applied to any number of candidates for elections. Money spent oppossing a candidate may or may not contribute to the election of an official and yet it is a popular tactic in American Politics. 
 
 
 
