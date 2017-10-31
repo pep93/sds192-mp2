@@ -9,10 +9,8 @@ output: html_document
 ## Loading the data
 
 
-```{r, include=FALSE}
-load("house_elections.rda")
+```{r}
 load("candidates.rda")
-load("committees.rda")
 load("contributions.rda")
 ```
 
@@ -23,29 +21,12 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-```{r}
-glimpse(candidates)
-```
-
-```{r}
-glimpse(committees)
-```
-
-```{r}
-glimpse(contributions)
-```
-
-```{r}
-glimpse(house_elections)
-```
-
+The first step was narrowing down the information that we needed from each of the two different tables that we wanted to work with. From the contributions table, we needed the transaction type, the candidate ID associated with that particular transaction type, and the total amount of money spent toward each candidate. From the candidates table, we really only need the candidate name associated with it's corresponding candidate ID. Throughout our process, we thought it was important to create new data sets every time we wrangled, instead of replacing an existing data set, in order to be able to easily go back and look at previous information if need be.
 
 ```{r}
 transaction_info <- contributions %>%
   group_by(transaction_type, cand_id) %>%
   summarise(transaction_total = sum(transaction_amt))
-
-glimpse(transaction_info)
 ```
 
 ```{r}
@@ -53,16 +34,16 @@ candidates_info <- candidates %>%
   group_by(cand_id, cand_name)
 
 candidates_info <- candidates_info[,c("cand_id", "cand_name")]
-
-glimpse(candidates_info)
 ```
+
+The next step was joining both of the tables together. This way we could have the candidate name, not just the ID, how much money was spent toward each candidate, and transaction type of the money spent all in the same table. Because both of our new data sets had a "cand_id" variable, it was easy to join the two together.
 
 ```{r}
 transaction_and_candidate <- transaction_info %>%
   inner_join(candidates_info, by = c("cand_id"))
-
-glimpse(transaction_and_candidate)
 ```
+
+We wanted to graph only a couple of candidates. We based our decision off of the top candidates that had the highest amount of money spent toward them. 
 
 ```{r}
 most_expensive_pres_candidates <- transaction_and_candidate %>%
@@ -70,12 +51,14 @@ most_expensive_pres_candidates <- transaction_and_candidate %>%
   summarise(contribution_total = sum(transaction_total))
 ```
 
+When Barack Obama and Mitt Romney were the highest and second highest candidate on our list, we decided to only focus on them. We thought this would be an interesting comparison, since they ran against each other in the 2012 Presidential Election. We decided to filter the data to include only the information we needed for those two candidates. Again, we created a brand new table in order to not lose the previous table we created. 
+
 ```{r}
 transaction_and_pres_candidates <- transaction_and_candidate %>%
   filter(cand_id == "P80003338" | cand_id == "P80003353")
-
-glimpse(transaction_and_pres_candidates)
 ```
+
+Because the point of our graph is to show the amount of money spent either supporting or opposing these candidates, we thought it would be cleaner to only have two different legends, instead of graphing the individual different transaction types. We looked up the different transaction types and determined if the objective of each ws to either support or oppose a candidate. We found that only two out of the seven types' goals are to oppose a candidate. We realized we needed to create a different column showing this, in order to group these transaction types together in the future.
 
 ```{r}
 support_pres_candidates <- transaction_and_pres_candidates %>%
@@ -83,11 +66,15 @@ support_pres_candidates <- transaction_and_pres_candidates %>%
   mutate(support_true = transaction_type  %in% c("24C", "24E", "24F", "24K", "24Z"))
 ```
 
+After correctly labeling the different transaction types as true (supported candidate) or false (opposed candidate), we then need the total amounts for transaction types that spent money opposing candidates and a total amount for transaction types that spent money supporting candidates. Since we had previously created a coloumn specifying the objectives of each transaction type, it made it easy to group them together and find the totals for each.
+
 ```{r}
 support_total_pres_candidates <- support_pres_candidates %>%
   group_by(cand_id, cand_name, support_true) %>%
   summarise(support_total = sum(transaction_total))
 ```
+
+After we had the candidates and the amount of money spent either supporting or opposing them, we were ready to start graphing. 
 
 ```{r}
 library(RColorBrewer)
@@ -122,14 +109,14 @@ Our data graphic shows the amount spent by committees for Barack Obama and Mitt 
 
 The x-axis displays the two final candidates for the 2012 presidential election; Barack Obama and Mitt Romney.  The y-axis displays the total amount of money spent by committees.  
 
-We catagorized the committee codes by transaction type based on either positive or negative money spent for or against a candidate. 
+We categorized the committee codes by transaction type based on either positive or negative money spent for or against a candidate. 
 The transaction codes used by committees are as follows:
 
 Money Spent Opposing Candidate:
 
 24A-Independent expenditure opposing election of candidate  
 24N-Communication cost against candidate (only for Form 7 filer)  
-24K-Contribution made to nonaffiliated committee  
+24K-Contribution made to non affiliated committee  
 
 Money Spent Supporting Candidate:
 
@@ -140,15 +127,15 @@ Money Spent Supporting Candidate:
 
 By using the transaction code and therefore the intention of the money, we are able to look at the amount of money going either for or against each candidate.  Our data graphic shows that 2.5 times more money was spent opposing Barack Obama than was spent opposing Mitt Romney. We felt this was interesting because it shows the sheer amount of effort spent against Barack Obama. 
 
-To give an example of what money spent against Barack Obama goes to: below is an ad that ran during the 2012 election cycle. It is paid for by the committee Crossroads Grassroots Policy Strategies.  This committe's number 1 transaction type is 24A, (24A-Independent expenditure opposing election of candidate), against Barack Obama. 
+To give an example of what money spent against Barack Obama goes to: below is an ad that ran during the 2012 election cycle. It is paid for by the committee Crossroads Grassroots Policy Strategies.  This committee's number 1 transaction type is 24A, (24A-Independent expenditure opposing election of candidate), against Barack Obama. 
 
 ![Ad against Obama, provided by ProPubica.org](https://assets.propublica.org/legacy/images/_threeTwo800w/gps_tv_ad_390x260_120813.jpg "Anti-Obama Ad")
 
-Restore Our Future, American Crossroads, Americans for Prosperity, and Crossroads Grassroots Policy Strategiees are all Republican affiliated committees and they constitute the top **17** contributers of money spent to Obama, these are **negative** (using code 24A; Independent expenditure opposing election of candidate). Obama does not get a postive conribution until The Democratic National Committe squeezes in the 18 top contributing spot.
+Restore Our Future, American Crossroads, Americans for Prosperity, and Crossroads Grassroots Policy Strategies are all Republican affiliated committees and they constitute the top **17** contributes of money spent to Obama, these are **negative** (using code 24A; Independent expenditure opposing election of candidate). Obama does not get a postie contribution until The Democratic National Committee squeezes in the 18 top contributing spot.
 
-Alternately, The Republican National Committee, Restore our Future, Republican National Committee make up the top 4 committee contributors to Mitt Romney. His first **negative** money doesn't come until the 5th spot with Priorites USA Action (using code 24A; Independent expenditure opposing election of candidate)
+Alternately, The Republican National Committee, Restore our Future, Republican National Committee make up the top 4 committee contributors to Mitt Romney. His first **negative** money doesn't come until the 5ht spot with Priories USA Action (using code 24A; Independent expenditure opposing election of candidate)
 
-We chose to show the net positive and negative amounts of this number crunching and committee affiliation in our data graphic so that the braoder picture of money spent for or against a candidate can be clear. 
+We chose to show the net positive and negative amounts of this number crunching and committee affiliation in our data graphic so that the broader picture of money spent for or against a candidate can be clear. 
 
 
 
