@@ -55,7 +55,7 @@ transaction_and_pres_candidates <- transaction_and_candidate %>%
   filter(cand_id == "P80003338" | cand_id == "P80003353")
 ```
 
-Because the point of our graph is to show the amount of money spent either supporting or opposing these candidates, we thought it would be cleaner to only have two different legends, instead of graphing the individual different transaction types. We looked up the different transaction types and determined if the objective of each ws to either support or oppose a candidate. We found that only two out of the seven types' goals are to oppose a candidate. We realized we needed to create a different column showing this, in order to group these transaction types together in the future.
+Because the point of our graph is to show the amount of money spent either supporting or opposing these candidates, we thought it would be cleaner to only have two different legends, instead of graphing the individual different transaction types. We looked up the different transaction types and determined if the objective of each was to either support or oppose a candidate. We found that only two out of the seven types' goals are to oppose a candidate. We realized we needed to create a different column showing this, in order to group these transaction types together in the future.
 
 ```{r}
 support_pres_candidates <- transaction_and_pres_candidates %>%
@@ -63,7 +63,7 @@ support_pres_candidates <- transaction_and_pres_candidates %>%
   mutate(support_true = transaction_type  %in% c("24C", "24E", "24F", "24K", "24Z"))
 ```
 
-After correctly labeling the different transaction types as true (supported candidate) or false (opposed candidate), we then need the total amounts for transaction types that spent money opposing candidates and a total amount for transaction types that spent money supporting candidates. Since we had previously created a coloumn specifying the objectives of each transaction type, it made it easy to group them together and find the totals for each.
+After correctly labeling the different transaction types as true (supported candidate) or false (opposed candidate), we then needed the total amounts for transaction types that spent money opposing candidates and a total amount for transaction types that spent money supporting candidates. Since we had previously created a coloumn specifying the objectives of each transaction type, it made it easy to group them together and find the totals for each.
 
 ```{r}
 support_total_pres_candidates <- support_pres_candidates %>%
