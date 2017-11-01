@@ -6,13 +6,13 @@ output: html_document
 ---
 
 
-```{r}
+```{r, include = FALSE}
 load("candidates.rda")
 load("contributions.rda")
 ```
 
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
@@ -125,7 +125,7 @@ Alternately, The Republican National Committee, Restore our Future, and Republic
 
 We chose to show the financial allocation objectives toward each candidate in our data graphic so that the amount of money spent for or against a candidate can be clear. Since Obama ultimately became the president, we think this is interesting to see that money spent opposing a candidate does not necessarily correlate to that candidate losing. 
 
-In a generalized sense our analysis shows an overview of how money is spent in elections. Large sums and efforts are made opposing candidates. In a broad sense, this can be applied to any number of candidates for any type of election. Money spent opposing a candidate does not necessarily contribute to the outcome of a elected official, nut yet it remains a popular tactic in American Politics. 
+In a generalized sense our analysis shows an overview of how money is spent in elections. Large sums and efforts are made opposing candidates. In a broad sense, this can be applied to any number of candidates for any type of election. Money spent opposing a candidate does not necessarily contribute to the outcome of a elected official, but yet it remains a popular tactic in American Politics. 
 
 
 
